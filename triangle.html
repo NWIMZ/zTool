@@ -1,128 +1,128 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title></title>
-        <style>
-            .fl{
-                float: left;
-            }
-            .fr{
-                float: right;
-            }
-            .cl:after{
-                display: block;
-                content: "";
-                clear: both;
-            }
-            .w33p{
-                width: 33%;
-            }
-            #cssText{
-                width: 100%;
-                min-height: 300px;
-            }
-            #triangle{
-                margin: 0 auto;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="w33p fl">
-            <p>
-                <label>底</label>
-                <input type="text" id="width" />
-            </p>
-            <p>
-                <label>高</label>
-                <input type="text" id="height" />
-            </p>
-            <p>
-                <label>方向</label>
-                <select id="direction">
-                    <option value="top">上</option>
-                    <option value="bottom">下</option>
-                    <option value="left">左</option>
-                    <option value="right">右</option>
-                </select>
-            </p>
-        </div>
-        <div class="w33p fl">
-            <textarea id="cssText"></textarea>
-        </div>
-        <div class="w33p fl">
-            <div id="triangle"></div>
-        </div>
-        
-        <script>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			.fl{
+				float: left;
+			}
+			.fr{
+				float: right;
+			}
+			.cl:after{
+				display: block;
+				content: "";
+				clear: both;
+			}
+			.w33p{
+				width: 33%;
+			}
+			#cssText{
+				width: 100%;
+				min-height: 300px;
+			}
+			#triangle{
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="w33p fl">
+			<p>
+				<label>底</label>
+				<input type="text" id="width" />
+			</p>
+			<p>
+				<label>高</label>
+				<input type="text" id="height" />
+			</p>
+			<p>
+				<label>方向</label>
+				<select id="direction">
+					<option value="top">上</option>
+					<option value="bottom">下</option>
+					<option value="left">左</option>
+					<option value="right">右</option>
+				</select>
+			</p>
+		</div>
+		<div class="w33p fl">
+			<textarea id="cssText"></textarea>
+		</div>
+		<div class="w33p fl">
+			<div id="triangle"></div>
+		</div>
+		
+		<script>
 
-            (function(){
-                var oWidth = document.getElementById("width");
-                var oHeight = document.getElementById("height");
-                var oDirection = document.getElementById("direction");
-                var oTriangle = document.getElementById("triangle");
-                var oCssText = document.getElementById("cssText");
-                
-                oWidth.value = 10;
-                oHeight.value = 10;
-                
-                oWidth.addEventListener("keydown",function(){
-                    if(event.keyCode==13){
-                        _keydownEvent();
-                    }
-                });
-                oHeight.addEventListener("keydown",function(){
-                    _keydownEvent();
-                })
-                oDirection.addEventListener("change",function(){
-                    _keydownEvent();
-                })
-                var _keydownEvent = function(){
-                    var w = oWidth.value;
-                    var h = oHeight.value;
-                    var d = oDirection.value;
-                    var c = "red";
-                    var css = getTriangleCss(w,h,d,c);
-                    oCssText.value = css;
-                    oTriangle.style.cssText = css;
-                }
-                
-                var getTriangleCss = function(w,h,d,c){
-                    switch (d){
-                        case "top":
-                            s = "    border-bottom: " + w + "px solid " + c + ";\n"
-                                + "    border-left: " + h/2 + "px solid transparent;\n"
-                                + "    border-right: " + h/2 + "px solid transparent;\n";
-                            break;
-                        case "bottom":
-                            s = "    border-top: " + w + "px solid " + c + " ;\n"
-                                + "    border-left: " + h/2 + "px solid transparent;\n"
-                                + "    border-right: " + h/2 + "px solid transparent;\n";
-                            break;
-                        case "left":
-                            s = "    border-right: " + w + "px solid " + c + " ;\n"
-                                + "    border-top: " + h/2 + "px solid transparent;\n"
-                                + "    border-bottom: " + h/2 + "px solid transparent;\n";
-                            break;
-                        case "right":
-                            s = "    border-left: " + w + "px solid " + c + " ;\n"
-                                + "    border-top: " + h/2 + "px solid transparent;\n"
-                                + "    border-bottom: " + h/2 + "px solid transparent;\n";
-                            break;
-                        default:
-                            break;
-                    }
-                    
-                    var r = "\n"
-                        + "    width: 0;\n"
-                        + "    height: 0;\n"
-                        + s
-                        + "";
-                    return r;
-                }
-            })()
-            
-                
-        </script>
-    </body>
+			(function(){
+				var oWidth = document.getElementById("width");
+				var oHeight = document.getElementById("height");
+				var oDirection = document.getElementById("direction");
+				var oTriangle = document.getElementById("triangle");
+				var oCssText = document.getElementById("cssText");
+				
+				oWidth.value = 10;
+				oHeight.value = 10;
+				
+				oWidth.addEventListener("keydown",function(){
+					if(event.keyCode==13){
+						_keydownEvent();
+					}
+				});
+				oHeight.addEventListener("keydown",function(){
+					_keydownEvent();
+				})
+				oDirection.addEventListener("change",function(){
+					_keydownEvent();
+				})
+				var _keydownEvent = function(){
+					var w = oWidth.value;
+					var h = oHeight.value;
+					var d = oDirection.value;
+					var c = "red";
+					var css = getTriangleCss(w,h,d,c);
+					oCssText.value = css;
+					oTriangle.style.cssText = css;
+				}
+				
+				var getTriangleCss = function(w,h,d,c){
+					switch (d){
+						case "top":
+							s = "    border-bottom: " + w + "px solid " + c + ";\n"
+								+ "    border-left: " + h/2 + "px solid transparent;\n"
+								+ "    border-right: " + h/2 + "px solid transparent;\n";
+							break;
+						case "bottom":
+							s = "    border-top: " + w + "px solid " + c + " ;\n"
+								+ "    border-left: " + h/2 + "px solid transparent;\n"
+								+ "    border-right: " + h/2 + "px solid transparent;\n";
+							break;
+						case "left":
+							s = "    border-right: " + w + "px solid " + c + " ;\n"
+								+ "    border-top: " + h/2 + "px solid transparent;\n"
+								+ "    border-bottom: " + h/2 + "px solid transparent;\n";
+							break;
+						case "right":
+							s = "    border-left: " + w + "px solid " + c + " ;\n"
+								+ "    border-top: " + h/2 + "px solid transparent;\n"
+								+ "    border-bottom: " + h/2 + "px solid transparent;\n";
+							break;
+						default:
+							break;
+					}
+					
+					var r = "\n"
+						+ "    width: 0;\n"
+						+ "    height: 0;\n"
+						+ s
+						+ "";
+					return r;
+				}
+			})()
+			
+				
+		</script>
+	</body>
 </html>
