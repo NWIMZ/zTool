@@ -66,12 +66,12 @@
 				oWidth.value = 10;
 				oHeight.value = 10;
 				
-				oWidth.addEventListener("keydown",function(){
+				oWidth.addEventListener("keyup",function(){
 					if(event.keyCode==13){
 						_keydownEvent();
 					}
 				});
-				oHeight.addEventListener("keydown",function(){
+				oHeight.addEventListener("keyup",function(){
 					_keydownEvent();
 				})
 				oDirection.addEventListener("change",function(){
