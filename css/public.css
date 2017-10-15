@@ -26,7 +26,7 @@
 }
 /*====================END====================*/
 html,body{height: 100%;}
-body{background: #040404;}
+body{background: #040404;color: #fff;}
 
 /*表单控件*/
 label{
@@ -46,6 +46,18 @@ input[type=text],select{
 	height: 38px;
 	background-color: #07121d;
 	border: 1px solid rgba(255,255,255,0.3);
+}
+input[type=button]{
+	height: 38px;
+	font-size: 16px;
+	font-weight: 100;
+	border: none;
+	background-color: #07121d;
+	color: #fff;
+	border: 1px solid rgba(255,255,255,0.3);
+	padding-left: 10px;
+	padding-right: 10px;
+	transition: all 0.2s;
 }
 textarea{
 	background-color: #07121d;
