@@ -6,44 +6,57 @@
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/public.css" />
 		<style>
-			.w33p{
-				width: 33%;
-			}
+			
 			#cssText{
 				width: 100%;
 				min-height: 300px;
 			}
 			#triangle{
+				position: relative;
+				top: 50%;
 				margin: 0 auto;
+			}
+			
+			#preview{
+				height: 300px;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="w33p fl">
-			<p>
-				<label>底</label>
-				<input type="text" id="width" />
-			</p>
-			<p>
-				<label>高</label>
-				<input type="text" id="height" />
-			</p>
-			<p>
-				<label>方向</label>
-				<select id="direction">
-					<option value="top">上</option>
-					<option value="bottom">下</option>
-					<option value="left">左</option>
-					<option value="right">右</option>
-				</select>
-			</p>
+		<div class="main">
+			<div class="w320 fl border">
+				<h2>参数</h2>
+				<p>
+					<label>底</label>
+					<input type="text" id="width" />
+				</p>
+				<p>
+					<label>高</label>
+					<input type="text" id="height" />
+				</p>
+				<p>
+					<label>方向</label>
+					<select id="direction">
+						<option value="top">上</option>
+						<option value="bottom">下</option>
+						<option value="left">左</option>
+						<option value="right">右</option>
+					</select>
+				</p>
+			</div>
+			
+			<div class="w320 fl border" id="preview">
+				<h2>预览</h2>
+				<div id="triangle"></div>
+			</div>
+			
+			<div class="w320 fl border">
+				<h2>CSS</h2>
+				<textarea id="cssText"></textarea>
+			</div>
+			
 		</div>
-		<div class="w33p fl">
-			<textarea id="cssText"></textarea>
-		</div>
-		<div class="w33p fl">
-			<div id="triangle"></div>
-		</div>
+				
 		
 		<script>
 
@@ -81,24 +94,24 @@
 				var getTriangleCss = function(w,h,d,c){
 					switch (d){
 						case "top":
-							s = "    border-bottom: " + w + "px solid " + c + ";\n"
-								+ "    border-left: " + h/2 + "px solid transparent;\n"
-								+ "    border-right: " + h/2 + "px solid transparent;\n";
+							s = "    border-bottom: " + h + "px solid " + c + ";\n"
+								+ "    border-left: " + w/2 + "px solid transparent;\n"
+								+ "    border-right: " + w/2 + "px solid transparent;\n";
 							break;
 						case "bottom":
-							s = "    border-top: " + w + "px solid " + c + " ;\n"
-								+ "    border-left: " + h/2 + "px solid transparent;\n"
-								+ "    border-right: " + h/2 + "px solid transparent;\n";
+							s = "    border-top: " + h + "px solid " + c + " ;\n"
+								+ "    border-left: " + w/2 + "px solid transparent;\n"
+								+ "    border-right: " + w/2 + "px solid transparent;\n";
 							break;
 						case "left":
-							s = "    border-right: " + w + "px solid " + c + " ;\n"
-								+ "    border-top: " + h/2 + "px solid transparent;\n"
-								+ "    border-bottom: " + h/2 + "px solid transparent;\n";
+							s = "    border-right: " + h + "px solid " + c + " ;\n"
+								+ "    border-top: " + w/2 + "px solid transparent;\n"
+								+ "    border-bottom: " + w/2 + "px solid transparent;\n";
 							break;
 						case "right":
-							s = "    border-left: " + w + "px solid " + c + " ;\n"
-								+ "    border-top: " + h/2 + "px solid transparent;\n"
-								+ "    border-bottom: " + h/2 + "px solid transparent;\n";
+							s = "    border-left: " + h + "px solid " + c + " ;\n"
+								+ "    border-top: " + w/2 + "px solid transparent;\n"
+								+ "    border-bottom: " + w/2 + "px solid transparent;\n";
 							break;
 						default:
 							break;
