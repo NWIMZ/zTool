@@ -6,7 +6,9 @@
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/public.css" />
 		<style>
-			
+			.main{
+				padding-top: 200px;
+			}
 			#cssText{
 				width: 100%;
 				min-height: 300px;
@@ -67,31 +69,57 @@
 				var oTriangle = document.getElementById("triangle");
 				var oCssText = document.getElementById("cssText");
 				
-				oWidth.value = 10;
-				oHeight.value = 10;
+				window.onload = function(){
+					oWidth.value = 10;
+					oHeight.value = 10;
+					getCss();
+				}
+					
 				
 				oWidth.addEventListener("keyup",function(){
-					if(event.keyCode==13){
-						_keydownEvent();
-					}
+					getCss();
 				});
 				oHeight.addEventListener("keyup",function(){
-					_keydownEvent();
+					getCss();
 				})
 				oDirection.addEventListener("change",function(){
-					_keydownEvent();
+					getCss();
 				})
-				var _keydownEvent = function(){
-					var w = oWidth.value;
-					var h = oHeight.value;
-					var d = oDirection.value;
-					var c = "red";
-					var css = getTriangleCss(w,h,d,c);
-					oCssText.value = css;
-					oTriangle.style.cssText = css;
+				
+				var getOptions = function(){
+					return {
+						width: oWidth.value,
+						height: oHeight.value,
+						direction: oDirection.value,
+						color: "#fff",
+					}
+				}
+				var getCss = function(){
+					var opts = getOptions();
+					var w = opts.width;
+					var h = opts.height;
+					if(/\d/g.test(w) && /\d/g.test(h)){
+						
+						var css = getTriangleCss(opts);
+						
+						oCssText.value = css;
+						oTriangle.style.cssText = css;
+					}else{
+						if(w==""||h==""){
+							oCssText.value = ""
+						}else{
+							oCssText.value = "参数输入有误";
+						}
+						
+					}
 				}
 				
-				var getTriangleCss = function(w,h,d,c){
+				var getTriangleCss = function(opts){
+					var w = opts.width;
+					var h = opts.height;
+					var d = opts.direction;
+					var c = opts.color || "#fff";
+					
 					switch (d){
 						case "top":
 							s = "    border-bottom: " + h + "px solid " + c + ";\n"
