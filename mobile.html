@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>移动端重定向</h2>
+		<script>
+			var redirect = function(url){
+				var sUserAgent = navigator.userAgent;
+				if(sUserAgent.indexOf('Android') > -1 || sUserAgent.indexOf('iPhone') > -1 || sUserAgent.indexOf('iPad') > -1 || sUserAgent.indexOf('iPod') > -1 || sUserAgent.indexOf('Symbian') > -1) {
+					location.href = url;
+				} else {}
+			}
+			redirect('https://www.baidu.com');
+		</script>
+	</body>
+</html>
