@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.find-div-body{
+		        position: relative;
+		        top:30px;
+		        right:0px;
+		        width:400px;
+		        height:200px;
+		        padding:8px;
+		        background-color: #FFFFFF;
+		        border: #cccccc solid 1px;
+		        border-radius: 3px;
+		    }
+			.find-div-body:before{
+		        box-sizing: content-box;
+		        width: 0px;
+		        height: 0px;
+		        position: absolute;
+		        top: -18px;;
+		        right:40px;
+		        padding:0;
+		        /*border-bottom:0px solid #FFFFFF;*/
+		        border-top:40px solid #FFFFFF;
+		        border-left:20px solid transparent;
+		        border-right:20px solid transparent;
+		        display: block;
+		        content:'';
+		        z-index: 12;
+		    }
+		    .find-div-body:after{
+		        box-sizing: content-box;
+		        width: 0px;
+		        height: 0px;
+		        position: absolute;
+		        top: -18px;;
+		        right:40px;
+		        padding:0;
+		        /*border-bottom:15px solid #cccccc;*/
+		        border-top:38px solid #cccccc;
+		        border-left:18px solid transparent;
+		        border-right:18px solid transparent;
+		        display: block;
+		        content:'';
+		        z-index:10
+		    }
+		</style>
+	</head>
+	<body>
+		<div class="find-div-body"></div>
+	</body>
+</html>
