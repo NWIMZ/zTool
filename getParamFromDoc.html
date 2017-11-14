@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<textarea name="" id="paramInp" rows="" cols=""></textarea>
+		<p id="output"></p>
+		
+		<script type="text/javascript">
+			var oInput = document.getElementById("paramInp");
+			var oOutput = document.getElementById("output");
+			
+			oInput.onkeyup = function(){
+				var inStr = this.value;
+				var inArr = inStr.split("\n");
+				var outArr = [];
+				for(var a in inArr){
+					var _a = inArr[a].split("\t");
+					var _s = _a[0] + ": param."+_a[0] + "," + "//" + _a[1] + "<br/>";
+					outArr.push(_s);
+				}
+				console.log(outArr);
+				
+				var outStr = outArr.join("");
+				oOutput.innerHTML = outStr;
+			}
+		</script>
+	</body>
+</html>
