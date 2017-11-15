@@ -3,11 +3,34 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/public.css" />
+		<style>
+			.title{
+				text-align: center;
+				margin-bottom: 100px;
+			}
+			body{
+				padding-top: 100px;
+			}
+			.left,.right{
+				width: 50%;
+				float: left;
+				text-align: center
+			}
+			
+		</style>
 	</head>
 	<body>
-		<textarea name="" id="paramInp" rows="" cols=""></textarea>
-		<p id="output"></p>
-		
+		<h1 class="title">从接口文档获取参数格式</h1>
+		<div class="main">
+			<div class="left">
+				<textarea autofocus name="paramInp" id="paramInp" cols="50" rows="10"></textarea>
+			</div>
+			<div class="right">
+				<textarea name="output" id="output" cols="50" rows="10"></textarea>
+			</div>
+		</div>
 		<script type="text/javascript">
 			var oInput = document.getElementById("paramInp");
 			var oOutput = document.getElementById("output");
@@ -17,8 +40,12 @@
 				var inArr = inStr.split("\n");
 				var outArr = [];
 				for(var a in inArr){
+					debugger
+					if(inArr[a]==""){
+						break;
+					}
 					var _a = inArr[a].split("\t");
-					var _s = _a[0] + ": param."+_a[0] + "," + "//" + _a[1] + "<br/>";
+					var _s = _a[0] + ": param."+_a[0] + "," + "//" + _a[1] + "\n";
 					outArr.push(_s);
 				}
 				console.log(outArr);
