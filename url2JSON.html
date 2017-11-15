@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>url与JSON相互转换</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/public.css" />
+		<style>
+			.main{
+				padding-top: 200px;
+			}
+			.left,.right{
+				width: 50%;
+				float: left;
+				text-align: center
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<div class="left">
+				<textarea name="url" id="url" cols="50" rows="10"></textarea>
+			</div>
+			<div class="right">
+				<textarea name="json" id="json" cols="50" rows="10"></textarea>
+			</div>
+		</div>
+		
+		<script>
+
+			function getUrlParam(_url){
+				// 截取?后面的字符
+				var _index = _url.indexOf("?");
+				if(_index==-1){
+					return "";
+				}else{
+					_index +=1;
+				}
+				var _param = _url.substring(_index);
+				console.log(_param);
+				return _param;
+			}
+			function getKeyValue(_param){
+				// 按照&分割为数组
+				var _paramArr = _param.split("&");
+				console.log(_paramArr);
+				
+				// 遍历 转化成键值对
+				var _json = {};
+				for(var i=0;i<_paramArr.length;i++){
+					var item = _paramArr[i];
+					var temp = item.split("=");
+					_json[temp[0]] = temp[1];
+				}
+				return _json;
+			}
+			(function(){
+				var oUrl = document.getElementById("url");
+				var oJson = document.getElementById("json");
+				
+				oUrl.addEventListener("keyup",function(){
+					var _url = oUrl.value;
+					
+					var _param = getUrlParam(_url);
+					
+					var _json = getKeyValue(_param);
+	
+	
+					// 渲染
+					var r = "{\n";
+					for(var a in _json){
+						r += "    " + a + ": " + _json[a] + ",\n";
+					}
+					r += "}";
+					oJson.value = r;
+				})
+				oJson.addEventListener("keyup",function(){
+					var _json = oJson.innerHTML;
+				})
+			})()
+		</script>
+	</body>
+</html>
