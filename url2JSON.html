@@ -75,7 +75,22 @@
 					oJson.value = r;
 				})
 				oJson.addEventListener("keyup",function(){
-					var _json = oJson.innerHTML;
+					debugger
+					var _json = oJson.value;
+					var _keyvalue = _json.split("\n");
+
+					var r = "";
+					for(var i=0;i<_keyvalue.length;i++){
+						var index = _keyvalue[i].indexOf(":")
+						if(index!=-1){
+							var _a = _keyvalue[i].split(":");
+							var key = _a[0].trim();
+							var _b = _a[1].split(",");
+							var value = _b[0];
+							r += ' + "&' + key + '=" + ' + value + "\n";
+						}
+					}
+					oUrl.value = r;
 				})
 			})()
 		</script>
