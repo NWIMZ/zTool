@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>url与JSON相互转换</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/public.css" />
+    <style>
+        .main {
+            padding-top: 200px;
+        }
+
+        .right {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="left">
+            <textarea autofocus name="json" id="json" cols="120" rows="20"></textarea>
+        </div>
+    </div>
+
+    <script>
+
+
+        var oJson = document.querySelector("#json");
+
+        oJson.addEventListener("keyup",function(event){
+            if(event.keyCode==13){
+                var json = string2JSON(oJson.value);
+                var sorted = sortJSON(json);
+                oJson.value = foramtJsonString(sorted);
+            }
+
+        })
+
+        /*输出*/
+        function foramtJsonString(json){
+
+            var str = "";
+            for(var a in json){
+                str += a + ": " + json[a] + ",\n";
+            }
+            str = "{\n" + str + "\n}";
+            return str;
+        }
+        
+
+        /**
+         * json按key排序
+         */
+        function sortJSON(json){
+            // 先将所有key保存在数组中
+            var keyArr = [];
+            for(var a in json){
+                keyArr.push(a);
+            }
+            // 给key排序
+            keyArr = bubbleSort(keyArr);
+
+            var result = {};
+            for(var b in keyArr){
+                result[b] = json[b];
+            }
+            return result;
+        }
+
+        /**
+         * 将string转成json
+         */
+        var reg = /\s+/g;// 匹配字符串
+        function string2JSON(string) {
+            var r = string.replace(reg, "");
+            return JSON.parse(r);
+        }
+
+        /** 
+         * 冒泡排序
+         */
+        function bubbleSort(arr){
+            for (var i = 0; i < arr.length - 1; i++) {
+                for (var j = i + 1; j < arr.length; j++) {
+                    if (arr[i] > arr[j]) {//如果前面的数据比后面的大就交换  
+                        var temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                    console.log("第" + (++times) + "次排序后：" + arr);
+                }
+            }
+            return arr;
+        }
+    </script>
+</body>
+
+</html>
