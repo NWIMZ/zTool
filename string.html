@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>html字符串拼接</title>
+</head>
+<body>
+    <div class="left">
+        <textarea name="" id="input" cols="30" rows="10"></textarea>
+
+
+    </div>
+    <div class="right">
+        <textarea name="" id="output" cols="30" rows="10"></textarea>
+    </div>
+    <script>
+        var oInput = document.getElementById("input");
+        var oOutput = document.getElementById("output");
+
+        oInput.onkeyup = function(){
+            tra(this.value);
+        }
+        function tra(s){
+            var arr = s.split("\n");
+            var r = "";
+            for(var i=0;i<arr.length;i++){
+                r += "+'" + arr[i].trim() + "'\n" ;
+            }
+            oOutput.value = r;
+        }
+    </script>
+</body>
+</html>
