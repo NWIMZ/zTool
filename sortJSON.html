@@ -32,9 +32,17 @@
 
         oJson.addEventListener("keyup",function(event){
             if(event.keyCode==13){
-                var json = string2JSON(oJson.value);
-                var sorted = sortJSON(json);
-                oJson.value = foramtJsonString(sorted);
+
+                var inputStr = this.value;
+                var arr = inputStr.split("\n");
+
+                var temp = [];
+                for(var i=0;i<arr.length;i++){
+                    temp.push(arr[i].trim());
+                }
+                var sorted = bubbleSort(temp);
+                var str = sorted.join("\n");
+                oJson.value = str;
             }
 
         })
@@ -50,25 +58,6 @@
             return str;
         }
         
-
-        /**
-         * json按key排序
-         */
-        function sortJSON(json){
-            // 先将所有key保存在数组中
-            var keyArr = [];
-            for(var a in json){
-                keyArr.push(a);
-            }
-            // 给key排序
-            keyArr = bubbleSort(keyArr);
-
-            var result = {};
-            for(var b in keyArr){
-                result[b] = json[b];
-            }
-            return result;
-        }
 
         /**
          * 将string转成json
@@ -90,10 +79,14 @@
                         arr[i] = arr[j];
                         arr[j] = temp;
                     }
-                    console.log("第" + (++times) + "次排序后：" + arr);
+                    //console.log("第" + (++times) + "次排序后：" + arr);
                 }
             }
-            return arr;
+            var result = [];
+            for(var a in arr){
+                result.push(arr[a]);
+            }
+            return result;
         }
     </script>
 </body>
