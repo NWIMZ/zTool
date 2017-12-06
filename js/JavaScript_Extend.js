@@ -80,10 +80,24 @@ Array.prototype.indexOf = function (item) {
 }
 /**
  * 删除数组中的指定元素
- * @param {*} item 数组元素，通常只能为基本数据类型
+ * @param {*} item 数组元素或者下标
  */
-Array.prototype.delete = function (item) {
-    var index = this.indexOf(item);
+Array.prototype.delete = function (item, type) {
+    var index;
+    // 没有指定类型
+    if (!type) {
+        if (typeof item == "number") {
+            index = item;
+        } else {
+            index = this.indexOf(item)
+        }
+    } else {
+        if (type == "index") {
+            index = item;
+        } else if (type == "item") {
+            index = this.indexOf(item)
+        }
+    }
     if (index != -1) {
         this.splice(index, 1);
     }
