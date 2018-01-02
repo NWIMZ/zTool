@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea name="" id="rem" cols="30" rows="10"></textarea>
+    <textarea name="" id="px" cols="30" rows="10"></textarea>
+    <script>
+        var oRem = document.querySelector("#rem");
+        var oPx = document.querySelector("#px");
+
+
+        var reg = /(\s||-)[0-9]+\.?[0-9]*rem/g;
+
+        oRem.addEventListener("keyup", function() {
+            console.log(this.value.match(reg));
+            var oldStr = this.value;
+            var arr = oldStr.match(reg) || [];
+            var newstr = oldStr;
+            for (let i = 0; i < arr.length; i++) {
+                let oldVal = arr[i];
+                let oldNum = arr[i].replace("rem", "");
+                let newNum = Math.round(oldNum * 75);
+                let newVal = " rem(" + newNum + ")";
+
+                newstr = newstr.replace(oldVal, newVal);
+            }
+
+            oPx.value = newstr;
+        })
+    </script>
+</body>
+
+</html>
