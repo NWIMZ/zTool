@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双引号变单引号</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/public.css" />
+    <style>
+        #textInp{
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <textarea name="" id="textInp" placeholder="在此输入文本，回车键转换"></textarea>
+
+    <script>
+        const oInp = document.getElementById("textInp");
+
+        oInp.onkeyup = function(event){
+            if(event.keyCode==13){
+                this.value = trans(this.value);
+            }
+        }
+        function trans(str){
+            let arr = str.split("\n");
+            for(let i=0;i<arr.length;i++){
+                let line = arr[i];
+                if(line.indexOf('\'') == -1){
+                    arr[i] = line.replace(/\"/g,'\'');
+                }else if(line.indexOf("\"") < line.indexOf("\'")){
+                    line = line.replace(/\"/g, '`');
+                    line = line.replace(/\'/g, '\"');
+                    arr[i] = line.replace(/`/g, '\'');
+                }
+            }
+            return arr.join('\n');
+        }
+        
+    </script>
+</body>
+</html>
