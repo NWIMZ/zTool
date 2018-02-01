@@ -7,25 +7,22 @@
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/public.css" />
 		<style>
-			.main{
-				padding-top: 200px;
-			}
-			.left,.right{
+			textarea {
 				width: 50%;
+				height: 100%;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
 				float: left;
-				text-align: center
+			}
+			#json{
+				border-left: 0px;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="main">
-			<div class="left">
-				<textarea autofocus name="url" id="url" cols="50" rows="10"></textarea>
-			</div>
-			<div class="right">
-				<textarea name="json" id="json" cols="50" rows="10"></textarea>
-			</div>
-		</div>
+		<textarea autofocus name="url" id="url"></textarea>
+		<textarea name="json" id="json" ></textarea>
 		
 		<script>
 
