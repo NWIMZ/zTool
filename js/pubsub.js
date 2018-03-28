@@ -1,14 +1,14 @@
 /**
- * 发布/订阅器
- * pubsub.publish()
- * pubsub.subscribe()
+ * @description 发布/订阅器
+ * pubsub.publish('sth',msg)
+ * pubsub.subscribe('sth',function(msg){})
  */
 var pubsub = (function() {
     var q = {};
     var topics = {};
     var subId = -1;
     /**
-     * 发布
+     * @description 发布
      * @param {String} topic 发布的消息名
      * @param {*} args 参数（消息内容）
      */
@@ -24,7 +24,7 @@ var pubsub = (function() {
         return this;
     };
     /**
-     * 订阅
+     * @description 订阅
      * @param {*} topic 订阅的消息名
      * @param {*} func 收到消息后的回调函数
      */
