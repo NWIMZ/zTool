@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>书法</title>
+    <style>
+        html{
+            background-color: #000;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        @font-face {
+            font-family: TianYinZhangKaiTi;
+            src: url('fonts/tyzkt.ttf'), url('fonts/tyzkt.eot'), url('fonts/tyzkt.otf');
+        }
+        #root{
+            font-family: TianYinZhangKaiTi;
+            text-align: center;
+            
+        }
+        .tyz{
+            font-family: TianYinZhangKaiTi;
+            display: inline-block;
+            border: 1px solid black;
+            font-size: 20px;
+        }
+        #root{
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+            font-size: 20px;
+            line-height: 50px;
+            /* zoom: 0.5; */
+            width: 100%;
+            /* height: 100%; */
+            color: #fff;
+        }
+        #root p:last-of-type{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            text-align: right;
+        }
+    </style>
+    <!-- <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script> -->
+    <script>
+        window.onload = render;
+        function render() {
+            const WIDTH = window.screen.width;
+            const HEIGHT = window.screen.height;
+
+            const fontWidth = 34.138;
+            const blank = 76.938 - fontWidth*2;
+            
+            var text = [
+                '人生不相见 动如参与商',
+                '今夕复何夕 共此灯烛光',
+                '少壮能几时 鬓发各已苍',
+                '访旧半为鬼 惊呼热中肠',
+                '焉知二十载 重上君子堂',
+                '昔别君未婚 儿女忽成行',
+                '怡然敬父执 问我来何方',
+                '问答乃未已 儿女罗酒浆',
+                '夜雨翦春韭 新炊间黄粱',
+                '主称会面难 一举累十觞',
+                '十觞亦不醉 感子故意长',
+                '<span class="max">明日隔山岳 世事两茫甫<span>',
+                '赠卫八处士 / 杜甫'
+            ];
+            
+
+            const ele = document.getElementById('root');
+            
+
+            // 一行几个字符
+            var rowNum = text[0].length;
+            // 一列几个字符
+            var colNum = text.length;
+
+    
+            let html = '';
+            for(let i=0;i<text.length;i++){
+                html += `<p>${text[i]}</p>`;
+            }
+            ele.innerHTML = html;
+
+
+            const maxEle = ele.getElementsByClassName('max')[0];
+
+            let marright = maxEle.offsetLeft;
+            ele.lastElementChild.style.marginRight = marright + 'px';
+
+
+            
+
+
+        }
+        </script>
+</head>
+<body>
+    <span class="tyz">朔</span>
+    <div id="root"></div>
+    <script type="text/babel">
+    </script>
+    
+</body>
+</html>

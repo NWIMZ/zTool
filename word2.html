@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>书法</title>
+    <style>
+        html{
+            background-color: #000;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        @font-face {
+            font-family: TianYinZhangKaiTi;
+            src: url('fonts/tyzkt.ttf'), url('fonts/tyzkt.eot'), url('fonts/tyzkt.otf');
+        }
+        #root{
+            font-family: TianYinZhangKaiTi;
+            box-sizing: border-box;
+            position: absolute;
+            padding-left: 13px;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+            font-size: 20px;
+            line-height: 50px;
+            /* zoom: 0.5; */
+            width: 100%;
+            /* height: 100%; */
+            color: #fff;
+        }
+        #root p:last-of-type{
+            position: absolute;
+            bottom: 0;
+            right: 13px;
+        }
+    </style>
+    <!-- <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script> -->
+    <script>
+        window.onload = render;
+        function render() {
+            const WIDTH = window.screen.width;
+            const HEIGHT = window.screen.height;
+
+            const fontWidth = 34.138;
+            const blank = 76.938 - fontWidth*2;
+            
+            var text = [
+                '秋风清',
+                '秋月明',
+                '落叶聚还散',
+                '寒鸦栖复惊',
+                '相思相见知何日',
+                '此时此夜难为情',
+                '入我相思门',
+                '知我相思苦',
+                '长相思兮长相忆',
+                '短相思兮无穷极',
+                '<span class="max">早知如此绊人心<span>',
+                '何如当初莫相识',
+                '秋风词 李白'
+            ];
+
+            var text = [
+                '夜饮东坡醒复醉',
+                '归来仿佛三更',
+                '家童鼻息已雷鸣',
+                '敲门都不应',
+                '倚杖听江声',
+                '长恨此身非我有',
+                '何时忘却营营',
+                '夜阑风静<span style="">縠</span>纹平',
+                '小舟从此逝',
+                '江海寄余生',
+                '临江仙 苏轼'
+            ]
+
+            const ele = document.getElementById('root');
+            
+
+            // 一行几个字符
+            var rowNum = text[0].length;
+            // 一列几个字符
+            var colNum = text.length;
+
+    
+            let html = '';
+            for(let i=0;i<text.length;i++){
+                html += `<p>${text[i]}</p>`;
+            }
+            ele.innerHTML = html;
+
+
+            const maxEle = ele.getElementsByClassName('max')[0];
+
+            let marright = maxEle.offsetLeft;
+            ele.lastElementChild.style.marginRight = marright + 'px';
+
+
+            
+
+
+        }
+        </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
