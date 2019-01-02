@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <style>
+        .banner-calendar .month {
+            width: 144px;
+            height: 39px;
+            line-height: 39px;
+            text-align: center;
+            vertical-align: middle;
+            background: linear-gradient(#E79095, #CE2F2A);
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
+            border-top-left-radius: 11px;
+            border-top-right-radius: 11px;
+            color: white;
+            position: relative;
+            font-size: 18px
+        }
+        .banner-calendar .date {
+            width: 144px;
+            height: 105px;
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom-right-radius: 11px;
+            border-bottom-left-radius: 11px;
+            box-shadow: 5px 0px 11px rgba(1, 12, 19, 0.5);
+        }
+        .banner-calendar .date .solarDay {
+            line-height: 79px;
+            text-align: center;
+            color: #000;
+            font-family: FlipFlop !important;
+            font-size: 77px;
+        }
+        .banner-calendar .date .lunarDay {
+            color: #000;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+    <div class="banner-calendar">
+        <div>
+            <div class="month number no-flicker">
+                <span id="month">{{ month }}</span>
+            </div>
+            <div class="date number">
+                <div class="solarDay number no-flicker" id="solarDay">{{ solarDay }}</div>
+                <div class="lunarDay number no-flicker" id="lunarDay">{{ lunarDay }}</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getWeek(weeknum) {
+            let week;
+            if (weeknum == 0) week = '星期日';
+            if (weeknum == 1) week = '星期一';
+            if (weeknum == 2) week = '星期二';
+            if (weeknum == 3) week = '星期三';
+            if (weeknum == 4) week = '星期四';
+            if (weeknum == 5) week = '星期五';
+            if (weeknum == 6) week = '星期六';
+            return week;
+        }
+
+        function showCal() {
+            let CalendarData = new Array(100);
+            let madd = new Array(12);
+            const numString = '一二三四五六七八九十';
+            const monString = '正二三四五六七八九十冬腊';
+            let cYear, cMonth, cDay, TheDate;
+            CalendarData = new Array(
+                0xa4b,
+                0x5164b,
+                0x6a5,
+                0x6d4,
+                0x415b5,
+                0x2b6,
+                0x957,
+                0x2092f,
+                0x497,
+                0x60c96,
+                0xd4a,
+                0xea5,
+                0x50da9,
+                0x5ad,
+                0x2b6,
+                0x3126e,
+                0x92e,
+                0x7192d,
+                0xc95,
+                0xd4a,
+                0x61b4a,
+                0xb55,
+                0x56a,
+                0x4155b,
+                0x25d,
+                0x92d,
+                0x2192b,
+                0xa95,
+                0x71695,
+                0x6ca,
+                0xb55,
+                0x50ab5,
+                0x4da,
+                0xa5b,
+                0x30a57,
+                0x52b,
+                0x8152a,
+                0xe95,
+                0x6aa,
+                0x615aa,
+                0xab5,
+                0x4b6,
+                0x414ae,
+                0xa57,
+                0x526,
+                0x31d26,
+                0xd95,
+                0x70b55,
+                0x56a,
+                0x96d,
+                0x5095d,
+                0x4ad,
+                0xa4d,
+                0x41a4d,
+                0xd25,
+                0x81aa5,
+                0xb54,
+                0xb6a,
+                0x612da,
+                0x95b,
+                0x49b,
+                0x41497,
+                0xa4b,
+                0xa164b,
+                0x6a5,
+                0x6d4,
+                0x615b4,
+                0xab6,
+                0x957,
+                0x5092f,
+                0x497,
+                0x64b,
+                0x30d4a,
+                0xea5,
+                0x80d65,
+                0x5ac,
+                0xab6,
+                0x5126d,
+                0x92e,
+                0xc96,
+                0x41a95,
+                0xd4a,
+                0xda5,
+                0x20b55,
+                0x56a,
+                0x7155b,
+                0x25d,
+                0x92d,
+                0x5192b,
+                0xa95,
+                0xb4a,
+                0x416aa,
+                0xad5,
+                0x90ab5,
+                0x4ba,
+                0xa5b,
+                0x60a57,
+                0x52b,
+                0xa93,
+                0x40e95
+            );
+            madd[0] = 0;
+            madd[1] = 31;
+            madd[2] = 59;
+            madd[3] = 90;
+            madd[4] = 120;
+            madd[5] = 151;
+            madd[6] = 181;
+            madd[7] = 212;
+            madd[8] = 243;
+            madd[9] = 273;
+            madd[10] = 304;
+            madd[11] = 334;
+
+            function GetBit(m, n) {
+                return (m >> n) & 1;
+            }
+
+            function e2c(solarYear, solarMonth, solarDay) {
+                TheDate =
+                    arguments.length != 3 ?
+                    new Date() :
+                    new Date(solarYear, solarMonth, solarDay);
+                let total, m, n, k;
+                let isEnd = false;
+                let tmp = TheDate.getYear();
+                if (tmp < 1900) {
+                    tmp += 1900;
+                }
+                total =
+                    (tmp - 1921) * 365 +
+                    Math.floor((tmp - 1921) / 4) +
+                    madd[TheDate.getMonth()] +
+                    TheDate.getDate() -
+                    38;
+                if (TheDate.getYear() % 4 == 0 && TheDate.getMonth() > 1) {
+                    total++;
+                }
+                for (m = 0;; m++) {
+                    k = CalendarData[m] < 0xfff ? 11 : 12;
+                    for (n = k; n >= 0; n--) {
+                        if (total <= 29 + GetBit(CalendarData[m], n)) {
+                            isEnd = true;
+                            break;
+                        }
+                        total = total - 29 - GetBit(CalendarData[m], n);
+                    }
+                    if (isEnd) break;
+                }
+                cYear = 1921 + m;
+                cMonth = k - n + 1;
+                cDay = total;
+                if (k == 12) {
+                    if (cMonth == Math.floor(CalendarData[m] / 0x10000) + 1) {
+                        cMonth = 1 - cMonth;
+                    }
+                    if (cMonth > Math.floor(CalendarData[m] / 0x10000) + 1) {
+                        cMonth--;
+                    }
+                }
+            }
+
+            function GetcDateString() {
+                let tmp = '';
+                if (cMonth < 1) {
+                    tmp += '(闰)';
+                    tmp += monString.charAt(-cMonth - 1);
+                } else {
+                    tmp += monString.charAt(cMonth - 1);
+                }
+                tmp += '月';
+                tmp += cDay < 11 ? '初' : cDay < 20 ? '十' : cDay < 30 ? '廿' : '三十';
+                if (cDay % 10 != 0 || cDay == 10) {
+                    tmp += numString.charAt((cDay - 1) % 10);
+                }
+                return tmp;
+            }
+
+            function GetLunarDay(solarYear, solarMonth, solarDay) {
+                //solarYear = solarYear<1900?(1900+solarYear):solarYear;
+                if (solarYear < 1921 || solarYear > 2020) {
+                    return '';
+                } else {
+                    solarMonth = parseInt(solarMonth) > 0 ? solarMonth - 1 : 11;
+                    e2c(solarYear, solarMonth, solarDay);
+                    return GetcDateString();
+                }
+            }
+
+            const D = new Date();
+            const yy = D.getFullYear();
+            const mm = D.getMonth() + 1;
+            const dd = D.getDate();
+            const ww = D.getDay();
+            const ss = parseInt(D.getTime() / 1000 + '', 10);
+            // function showCal() {
+
+            // }
+            let yyy;
+            if (yy < 100) {
+                yyy = '19' + yy;
+            } else {
+                yyy = yy + '';
+            }
+            const nongli = GetLunarDay(yyy, mm, dd);
+            return nongli;
+        }
+
+        const date = new Date();
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const week = getWeek(date.getDay());
+        const nongli = showCal();
+
+        var time = {
+            month: (month < 10 ? '0' + month : month) + '月 - ' + week,
+            solarDay: day < 10 ? '0' + day : day + '',
+            lunarDay: '农历' + nongli,
+        };
+        document.getElementById('month').innerHTML = time.month;
+        document.getElementById('solarDay').innerHTML = time.solarDay;
+        document.getElementById('lunarDay').innerHTML = time.lunarDay;
+
+    </script>
+</body>
+
+</html>
