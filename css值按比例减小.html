@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://nwimz.github.io/zLibs/css/reset.css">
+    <link rel="stylesheet" href="https://NWIMZ.github.io/zLibs/css/public.css">
+    <style>
+        textarea {
+            width: 50%;
+            height: 100%;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            float: left;
+        }
+
+        #px {
+            border-left: 0px;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="raw" placeholder="raw" value="1">
+        <input type="text" id="target" placeholder="target" value="2">
+        <input type="text" id="unit" placeholder="unit" value="px">
+    </div>
+    <div style="height: calc(100% - 50px)">
+        <textarea name="" id="rem" placeholder="rem"></textarea>
+        <textarea name="" id="px" placeholder="px"></textarea>
+    </div>
+    <script>
+        let oRaw = document.getElementById('raw')
+        let oTarget = document.getElementById('target');
+        let oUnit = document.getElementById('unit')
+        let oRem = document.getElementById("rem");
+        let oPx = document.getElementById("px");
+
+        let reg = /(\s||-)[0-9]+\.?[0-9]*rem/g;
+
+        oRem.addEventListener("keyup", function () {
+            let rawSize = oRaw.value;
+            let targetSize = oTarget.value;
+            let unit = oUnit.value;
+
+            console.log(this.value.match(reg));
+            let oldStr = this.value;
+            let arr = oldStr.match(reg) || [];
+            let newstr = oldStr;
+            for (let i = 0; i < arr.length; i++) {
+                let oldVal = arr[i];
+                let oldNum = arr[i].replace(unit, "");
+                let newNum = oldNum * (targetSize / rawSize);
+                let newVal = ' ' + newNum + unit;
+
+                newstr = newstr.replace(oldVal, newVal);
+            }
+
+            oPx.value = newstr;
+        })
+    </script>
+</body>
+
+</html>
