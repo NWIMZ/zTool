@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>棠棠今天吃什么</title>
+    <style>
+        #cvs{
+            margin-top: 200px;
+        }
+        body{
+            text-align: center;
+        }
+        #start{
+            margin-top: 200px;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="./style.css">
+     -->
+</head>
+<body>
+    <!-- <div class="wrapper">
+        <ul id="menu" class='pie'>
+            
+        <ul>
+        <div id="pointer"></div>
+        <div id="center"></div>
+    </div> -->
+    <canvas width="300" height="300" id="cvs"></canvas>
+    <div>
+        <button id="start">冲！</button>
+    </div>
+    
+    <script>
+        // var eMenuWrapper = document.getElementById("menu");
+        // var ePoint = document.getElementById("point");
+        var restaurant = ["王妈凉皮","i乐事","阿吉生煎","五谷鱼粉","炸鸡","米线","水饺","麻辣拌","麻辣香锅","石锅拌饭","螺蛳粉","煎饺","啵啵鱼","味爱餐厅","炒面","泡泡鸡","麻辣烫","年糕火锅","肉蟹煲"];
+        // var colors = ['#FF0088','#FF0000','#FF5511','#FF8800',,'#FFBB00','#BBFF00','#77FF00','#00FF00','#00FF99','#00FFCC']
+        var colors =  ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]
+ 
+        // var menuHtml = "";
+        var len = restaurant.length;
+        // for(var i=0;i<restaurant.length;i++){
+        //     menuHtml += "<li style='transform: rotate(-" + i * 360 / len + "deg) skewY(-54deg);" + "' class='slice-" + i % 10 + " slice'>" + restaurant[i] + "</li>"
+        // }
+        // eMenuWrapper.innerHTML = menuHtml;
+        var oCanvas = document.getElementById("cvs");
+        var ctx = oCanvas.getContext("2d");
+
+        // 绘制转盘
+        function drawB(x){
+            ctx.clearRect(0,0,300,300);
+            for(var i=0;i<len;i++){
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(150,150);
+                ctx.arc(150,150,120,2*Math.PI*(i/len)+x,2*Math.PI*((i+1)/len)+x);6
+                // ctx.stroke();
+                ctx.fillStyle = colors[i%10];
+                // console.log(i%2);
+                ctx.fill();
+
+                ctx.strokeStyle = "#000";
+                ctx.font = "12px serif"
+                ctx.translate(150,150);
+                ctx.rotate(2*Math.PI*(i/len)+x);
+                ctx.strokeText(restaurant[i],60,12);
+                ctx.restore();
+            }
+        }
+
+        function drawP(){
+            ctx.beginPath();
+            ctx.moveTo(148,148);
+            ctx.lineTo(148,152);
+            ctx.lineTo(240,150);
+            ctx.fillStyle = "black";
+            ctx.fill();
+        }
+        drawB(0);
+        drawP();
+        var deg = 0;
+        var timeId;
+        document.getElementById("start").onclick = function(){
+            clearInterval(timeId);
+            timeId = setInterval(function(){
+                drawB(deg);
+                deg+=0.1;
+                drawP();
+            },10);
+            setTimeout(function(){
+                clearInterval(timeId);
+            },500*Math.random()+1000);
+        }
+
+        // document.getElementById("stop").onclick = function(){
+        //     clearInterval(timeId);
+        // }
+
+    </script>
+</body>
+</html>
